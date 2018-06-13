@@ -16,6 +16,8 @@ repositories {
     }
 }
 ```
+![](Screenshot_1.png)
+
 ## Simple RecyclerView Implementation
 
 **Create View Holders with very easy code**. Provide the type of class that support the holder to display with. That class will be binded to display the content.
@@ -42,7 +44,7 @@ public static class EVHolder extends MyViewHolder<Events> {
 ```
 List<Events> items = new ArrayList<>();
 MyRecyclerView recycler = findViewById(R.id.recycler);
-RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, EVHolder.class, R.layout.row_contact);
+RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, EVHolder.class, R.layout.row_event);
 recycler.setAdapter(adapter);
 ```
 
@@ -85,9 +87,9 @@ public static class TVHolder extends MyViewHolder<String> {
     }
 }
 
-public static class OHolder extends MyViewHolder<Integer> {
+public static class DVHolder extends MyViewHolder<Integer> {
     TextView title;
-    public OHolder(View v) {
+    public DVHolder(View v) {
         super(v);
     }
     @Override
@@ -100,9 +102,9 @@ Define Multiview with **TypeHolderLayout** where the multi layout is binded to p
 
 ```
 List<MultiLayoutAdapter.TypeHolderLayout> holders = new ArrayList<>();
-holders.add(new TypeHolderLayout(Events.class, EVHolder.class, R.layout.row_contact));
+holders.add(new TypeHolderLayout(Events.class, EVHolder.class, R.layout.row_event));
 holders.add(new TypeHolderLayout(String.class, TVHolder.class, R.layout.row_simple));
-holders.add(new TypeHolderLayout(Integer.class, OHolder.class, R.layout.row_divider));
+holders.add(new TypeHolderLayout(Integer.class, DVHolder.class, R.layout.row_divider));
 
 ```
 
@@ -141,14 +143,13 @@ private void loadData() {
             if (data.size() > 0) {
                 String last="";
                 for (int i = 0; i < data.size(); i++) {
-                    items.add(new Integer(1));
+                    items.add(new Integer(1)); 					// adding Divider data
                     if (!last.equals(data.get(i).date.substring(5,7))) {
                         last = data.get(i).date.substring(5,7);
-                        items.add("For month of " + last);
+                        items.add("For month of " + last); 			// adding String data
                     }
-                    items.add(data.get(i));
+                    items.add(data.get(i)); 					// adding Event data
                 }
-//                    items.addAll(data);
                 recycler.loadComplete();
                 start += data.size();
             } else {
@@ -194,3 +195,5 @@ In case of using **Proguard**, use these lines
 -keep class com.hereshem.lib.** {*;}
 -dontwarn com.hereshem.lib.**
 ```
+
+*Happy Coding :)*

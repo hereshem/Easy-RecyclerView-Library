@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.hereshem.lib.recycler.MultiLayoutAdapter;
 import com.hereshem.lib.recycler.MyRecyclerView;
 import com.hereshem.lib.recycler.MyViewHolder;
-import com.hereshem.lib.recycler.RecyclerViewAdapter;
 import com.hereshem.lib.server.MyDataQuery;
 import com.hereshem.lib.utils.Preferences;
 
@@ -23,6 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     int start = 0;
     MyRecyclerView recycler;
+    // List<Events> items = new ArrayList<>();
     List<Object> items = new ArrayList<>();
 
     public static class Events {
@@ -79,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static class OHolder extends MyViewHolder<Integer> {
+    public static class DVHolder extends MyViewHolder<Integer> {
         TextView title;
-        public OHolder(View v) {
+        public DVHolder(View v) {
             super(v);
         }
         public void bindView(Integer c) {
@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<MultiLayoutAdapter.TypeHolderLayout> holders = new ArrayList<>();
-        holders.add(new MultiLayoutAdapter.TypeHolderLayout(Events.class, EVHolder.class, R.layout.row_contact));
+        holders.add(new MultiLayoutAdapter.TypeHolderLayout(Events.class, EVHolder.class, R.layout.row_event));
         holders.add(new MultiLayoutAdapter.TypeHolderLayout(String.class, TVHolder.class, R.layout.row_simple));
-        holders.add(new MultiLayoutAdapter.TypeHolderLayout(Integer.class, OHolder.class, R.layout.row_divider));
+        holders.add(new MultiLayoutAdapter.TypeHolderLayout(Integer.class, DVHolder.class, R.layout.row_divider));
 
         MultiLayoutAdapter adapter = new MultiLayoutAdapter(this, items, holders);
-//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, EVHolder.class, R.layout.row_contact);
+        // RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, EVHolder.class, R.layout.row_event);
 
         recycler = findViewById(R.id.recycler);
         recycler.setAdapter(adapter);
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         items.add(data.get(i));
                     }
-//                    items.addAll(data);
+                    // items.addAll(data);
                     recycler.loadComplete();
                     start += data.size();
                 } else {
