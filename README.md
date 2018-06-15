@@ -20,6 +20,16 @@ repositories {
 
 ## Simple RecyclerView Implementation
 
+**Add RecyclerView in the layout file using the following**
+
+```
+<com.hereshem.lib.recycler.MyRecyclerView
+        android:id="@+id/recycler"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+```
+
 **Create View Holders with very easy code**. Provide the type of class that support the holder to display with. That class will be binded to display the content.
 
 ```
