@@ -4,17 +4,7 @@
 You can add this library for making RecyclerView more Simpler using the following line in app level ```build.gradle``` file in Android Studio.
 
 ```
-implementation 'com.hereshem.lib:awesomelib:2.0.1'
-```
-And in the project level ```build.gradle``` add the following line
-
-```
-repositories {
-    ...
-    maven {
-        url  "https://dl.bintray.com/hereshem/awesomelib"
-    }
-}
+implementation 'com.hereshem.lib:awesomelib:2.1.0'
 ```
 ![](Screenshot_1.png)
 
@@ -108,13 +98,13 @@ public static class DVHolder extends MyViewHolder<Integer> {
 }
 ```
 
-Define Multiview with **TypeHolderLayout** where the multi layout is binded to play with the class initialized for the specific ViewHolder with specific layout.
+Define Multiview with **MultiLayoutHolder** where the multiple layout is binded to play with the class initialized for the specific ViewHolder with specific layout.
 
 ```
-List<MultiLayoutAdapter.TypeHolderLayout> holders = new ArrayList<>();
-holders.add(new TypeHolderLayout(Events.class, EVHolder.class, R.layout.row_event));
-holders.add(new TypeHolderLayout(String.class, TVHolder.class, R.layout.row_simple));
-holders.add(new TypeHolderLayout(Integer.class, DVHolder.class, R.layout.row_divider));
+List<MultiLayoutHolder> holders = new ArrayList<>();
+holders.add(new MultiLayoutHolder(Events.class, EVHolder.class, R.layout.row_event));
+holders.add(new MultiLayoutHolder(String.class, TVHolder.class, R.layout.row_simple));
+holders.add(new MultiLayoutHolder(Integer.class, DVHolder.class, R.layout.row_divider));
 
 ```
 
@@ -127,9 +117,11 @@ MultiLayoutAdapter adapter = new MultiLayoutAdapter(this, items, holders);
 recycler.setAdapter(adapter);
 ```
 
-The MultiLayout is automatically selected with the type of data added to the items. ```items.add(new Events(...));``` adds the EHolder and bind the Events item into the RecyclerView.
+The MultiLayout is automatically selected with the type of data added to the items. 
 
-```items.add("Hem Shrestha");``` adds the String layout and displays accordingly.
+```items.add(new Events(...));``` adds the EHolder and bind the Events item into the RecyclerView.
+
+```items.add(new String("Hem Shrestha"));``` adds the String layout and displays accordingly.
 
 ```items.add(new Integer(1));``` selects the divider layout.
 
@@ -181,7 +173,7 @@ new MyDataQuery(this, maps) {
 	...
 	...
     @Override
-    public String onDbQuery(String identifier, HashMap<String, String> params) {
+    public String onDataQuery(String identifier, MapPair params) {
         if(identifier.equals("0")){
             return new Preferences(getApplicationContext()).getPreferences("data_downloaded");
         }
@@ -189,7 +181,7 @@ new MyDataQuery(this, maps) {
     }
 
     @Override
-    public void onDbSave(String identifier, String response) {
+    public void onDataSave(String identifier, String response) {
         if(identifier.equals("0")){
             new Preferences(getApplicationContext()).setPreferences("data_downloaded", response);
         }
