@@ -1,10 +1,12 @@
-# Awesome RecyclerView with Easy Intractable Simple or MultiView support and Loadmore Library
-*An awesome library for the Android to make simpler with RecyclerView for simple and multi layout view adapter, LoadMore Features, ServerRequests, and many more.*
+# Awesome RecyclerView Library for Super Easy Implementation of Simple and MultiView Layout
 
-You can add this library for making RecyclerView more Simpler using the following line in app level ```build.gradle``` file in Android Studio.
+*An awesome library for the Android to make Simple RecyclerView and Multi Layout Recyclerview*
+
+Add the following line in dependencies part of  ```build.gradle``` in app directory.
 
 ```
 implementation 'com.hereshem.lib:awesomelib:2.1.0'
+
 ```
 ![](Screenshot_1.png)
 
@@ -119,11 +121,11 @@ recycler.setAdapter(adapter);
 
 The MultiLayout is automatically selected with the type of data added to the items. 
 
-```items.add(new Events(...));``` adds the EHolder and bind the Events item into the RecyclerView.
+```items.add(new Events(...));``` binds the EVHolder and Events item is displayed into the RecyclerView.
 
-```items.add(new String("Hem Shrestha"));``` adds the String layout and displays accordingly.
+```items.add(new String("Hem Shrestha"));``` binds the TVHolder and String item is displayed.
 
-```items.add(new Integer(1));``` selects the divider layout.
+```items.add(new Integer(1));``` binds and displays the divider layout.
 
 
 
@@ -177,7 +179,7 @@ new MyDataQuery(this, maps) {
         if(identifier.equals("0")){
             return new Preferences(getApplicationContext()).getPreferences("data_downloaded");
         }
-        return super.onDbQuery(identifier, params);
+        return super.onDataQuery(identifier, params);
     }
 
     @Override
