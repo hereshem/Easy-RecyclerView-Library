@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             super(v);
             title = v.findViewById(R.id.title);
         }
+        @Override
         public void bindView(String c) {
             title.setText(c);
         }
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         public DVHolder(View v) {
             super(v);
         }
+        @Override
         public void bindView(Integer c) {
         }
     }
@@ -120,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        new MyDataQuery(this, new MapPair()) {
+        new MyDataQuery(this) {
             @Override
             public void onSuccess(String identifier, String result) {
                 List<Events> data = Events.parseJSON(result);
@@ -146,11 +148,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public String onDataQuery(String identifier, MapPair params) {
+            public String onDataQuery(String identifier) {
                 if (identifier.equals("0")) {
                     return new Preferences(getApplicationContext()).getPreferences("data_downloaded");
                 }
-                return super.onDataQuery(identifier, params);
+                return super.onDataQuery(identifier);
             }
 
             @Override

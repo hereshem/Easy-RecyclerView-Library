@@ -5,7 +5,7 @@
 Add the following line in dependencies part of  ```build.gradle``` in app directory.
 
 ```
-implementation 'com.hereshem.lib:awesomelib:2.1.0'
+implementation 'com.hereshem.lib:awesomelib:2.1.1'
 
 ```
 ![](Screenshot_1.png)
@@ -171,15 +171,15 @@ private void loadData() {
 **Further more** - Offline support can also be provided.
 
 ```
-new MyDataQuery(this, maps) {
+new MyDataQuery(this) {
 	...
 	...
     @Override
-    public String onDataQuery(String identifier, MapPair params) {
+    public String onDataQuery(String identifier) {
         if(identifier.equals("0")){
             return new Preferences(getApplicationContext()).getPreferences("data_downloaded");
         }
-        return super.onDataQuery(identifier, params);
+        return super.onDataQuery(identifier);
     }
 
     @Override
