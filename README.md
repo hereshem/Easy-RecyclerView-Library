@@ -1,11 +1,11 @@
-# Awesome RecyclerView Library for Super Easy Implementation of Simple and MultiView Layout
+# Super Easy RecyclerView Library for Simple and MultiView Layout
 
 *An awesome library for the Android to make Simple RecyclerView and Multi Layout Recyclerview*
 
 Add the following line in dependencies part of  ```build.gradle``` in app directory.
 
 ```
-implementation 'com.hereshem.lib:awesomelib:2.1.1'
+implementation 'com.hereshem.lib:awesomelib:2.1.2'
 
 ```
 ![](Screenshot_1.png)
@@ -103,10 +103,10 @@ public static class DVHolder extends MyViewHolder<Integer> {
 Define Multiview with **MultiLayoutHolder** where the multiple layout is binded to play with the class initialized for the specific ViewHolder with specific layout.
 
 ```
-List<MultiLayoutHolder> holders = new ArrayList<>();
-holders.add(new MultiLayoutHolder(Events.class, EVHolder.class, R.layout.row_event));
-holders.add(new MultiLayoutHolder(String.class, TVHolder.class, R.layout.row_simple));
-holders.add(new MultiLayoutHolder(Integer.class, DVHolder.class, R.layout.row_divider));
+MultiLayoutHolder holders = new MultiLayoutHolder()
+                .add(Events.class, EVHolder.class, R.layout.row_event)
+                .add(String.class, TVHolder.class, R.layout.row_simple)
+                .add(Integer.class, DVHolder.class, R.layout.row_divider);
 
 ```
 
@@ -123,9 +123,9 @@ The MultiLayout is automatically selected with the type of data added to the ite
 
 ```items.add(new Events(...));``` binds the EVHolder and Events item is displayed into the RecyclerView.
 
-```items.add(new String("Hem Shrestha"));``` binds the TVHolder and String item is displayed.
+```items.add("Hem Shrestha");``` binds the TVHolder and String item is displayed.
 
-```items.add(new Integer(1));``` binds and displays the divider layout.
+```items.add(26);``` binds and displays the divider layout.
 
 
 
@@ -147,10 +147,12 @@ private void loadData() {
             if (data.size() > 0) {
                 String last="";
                 for (int i = 0; i < data.size(); i++) {
-                    items.add(new Integer(1)); 					// adding Divider data
                     if (!last.equals(data.get(i).date.substring(5,7))) {
                         last = data.get(i).date.substring(5,7);
-                        items.add("For month of " + last); 			// adding String data
+                        items.add("For month of " + last); 		// adding String data for text leveling
+                    }
+                    else{
+	                    items.add(i); 							// adding Integer data for Divider
                     }
                     items.add(data.get(i)); 					// adding Event data
                 }

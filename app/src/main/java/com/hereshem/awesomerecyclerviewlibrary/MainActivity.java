@@ -10,7 +10,6 @@ import com.hereshem.lib.recycler.MultiLayoutAdapter;
 import com.hereshem.lib.recycler.MultiLayoutHolder;
 import com.hereshem.lib.recycler.MyRecyclerView;
 import com.hereshem.lib.recycler.MyViewHolder;
-import com.hereshem.lib.server.MapPair;
 import com.hereshem.lib.server.Method;
 import com.hereshem.lib.server.MyDataQuery;
 import com.hereshem.lib.utils.Preferences;
@@ -96,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<MultiLayoutHolder> holders = new ArrayList<>();
-        holders.add(new MultiLayoutHolder(Events.class, EVHolder.class, R.layout.row_event));
-        holders.add(new MultiLayoutHolder(String.class, TVHolder.class, R.layout.row_simple));
-        holders.add(new MultiLayoutHolder(Integer.class, DVHolder.class, R.layout.row_divider));
+        MultiLayoutHolder holders = new MultiLayoutHolder()
+                .add(Events.class, EVHolder.class, R.layout.row_event)
+                .add(String.class, TVHolder.class, R.layout.row_simple)
+                .add(Integer.class, DVHolder.class, R.layout.row_divider);
 
         MultiLayoutAdapter adapter = new MultiLayoutAdapter(this, items, holders);
         // RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, EVHolder.class, R.layout.row_event);
@@ -132,10 +131,12 @@ public class MainActivity extends AppCompatActivity {
                 if (data.size() > 0) {
                     String last="";
                     for (int i = 0; i < data.size(); i++) {
-                        items.add(new Integer(1));
                         if (!last.equals(data.get(i).date.substring(5,7))) {
                             last = data.get(i).date.substring(5,7);
                             items.add("For month of " + last);
+                        }
+                        else {
+                            items.add(i);
                         }
                         items.add(data.get(i));
                     }
