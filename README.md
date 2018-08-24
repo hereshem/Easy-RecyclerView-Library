@@ -10,6 +10,8 @@ implementation 'com.hereshem.lib:awesomelib:2.1.2'
 ```
 ![](Screenshot_1.png)
 
+If you want to contribute on the library, please send the pull request to [this] (https://github.com/hereshem/RecyclerViewWithLoadMoreAndServerRequest) repository.
+
 ## Simple RecyclerView Implementation
 
 **Add RecyclerView in the layout file using the following**
